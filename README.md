@@ -1,14 +1,5 @@
 # selectron
 
-A Clojure library designed to ... well, that part is up to you.
+wherein I explore various answers to this tweet:
 
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+https://twitter.com/jessitron/status/516784705174134784
