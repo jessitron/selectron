@@ -18,13 +18,17 @@
 
 (defn select-spec-negative [select-fn]
   (prop/for-all [input (->> gen/int
-                            (gen/such-that (complement (keys hard-coded-data))))]
+                            (gen/such-that (complement (set (map :number hard-coded-data)))))]
                 (is (nil? (select-fn hard-coded-data input)))))
 
+(defn simple-select [data id-val]
+  (:animal (first (filter #(= id-val (:number %)) data))))
+
 (defspec first-instinct 10
-  (select-spec-positive
-    (fn [data id-val]
-        (:animal (first (filter #(= id-val (:number %)) data))))))
+  (select-spec-positive simple-select))
+
+(defspec first-instinct-neg 10
+  (select-spec-negative simple-select))
 
 
 (deftest a-test
