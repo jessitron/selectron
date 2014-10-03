@@ -1,6 +1,8 @@
 (ns selectron.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn simple-select [data id-val]
+  (:animal (first (filter #(= id-val (:number %)) data))))
+
+(defn my-select [out-fn data in-fn & check]
+  (first (map out-fn (filter (comp (apply partial check) in-fn) data))))
+

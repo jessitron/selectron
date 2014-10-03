@@ -3,7 +3,8 @@
             [clojure.test.check.clojure-test :refer [defspec]]
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]
-            [selectron.core :refer :all]))
+            [selectron.core :refer :all]
+            [selectron.datalog]))
 
 
 (def hard-coded-data [{:number 4 :animal "Raccoon"}
@@ -21,11 +22,9 @@
                             (gen/such-that (complement (set (map :number hard-coded-data)))))]
                 (is (nil? (select-fn hard-coded-data input)))))
 
-(defn simple-select [data id-val]
-  (:animal (first (filter #(= id-val (:number %)) data))))
+(defspec datalog-one 10
+  (select-spec-positive selectron.datalog/datalog-select))
 
-(defn my-select [out-fn data in-fn & check]
-  (first (map out-fn (filter (comp (apply partial check) in-fn) data))))
 
 (defspec first-instinct 10
   (select-spec-positive simple-select))
