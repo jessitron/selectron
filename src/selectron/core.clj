@@ -19,3 +19,10 @@
   (first (for [{id :number value :animal} data
                :when (= id id-val)]
           value)))
+
+;; Garrett Everding suggests the threading macro
+(defn garrett-select [data id-val]
+  (->> data
+       (filter #(= id-val (:number %)))
+       first
+       :animal))

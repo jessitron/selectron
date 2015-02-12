@@ -24,3 +24,9 @@
   (select-spec-positive eric-select))
 (defspec eric-neg
   (select-spec-negative eric-select))
+
+;; Garrett Everding's suggestion
+(defspec garrett-pos
+  (select-spec-positive garrett-select))
+(defspec garrett-neg
+  (select-spec-negative garrett-select))
