@@ -4,14 +4,21 @@
             [clojure.test.check.generators :as gen]
             [clojure.test.check.properties :as prop]
             [selectron.core :refer :all]
-            [selectron.datalog]))
+            [selectron.datalog]
+            [schema.core :as s]
+            [schema.test]))
 
+(use-fixtures :once schema.test/validate-schemas)
 
 (def hard-coded-data [{:number 4 :animal "Raccoon"}
                       {:number 8 :animal "Tarantula" }
                       {:number 2 :animal "Lemur"}])
 
-(defn select-spec-positive [select-fn]
+(def Animal (s/named s/Str "animal name"))
+(def ID (s/named s/Num "animal ID"))
+(def AnimalData [{:number ID :animal Animal}])
+
+(s/defn select-spec-positive [select-fn :- (s/=> Animal AnimalData ID)]
  (prop/for-all [rec (gen/elements hard-coded-data)]
       (let [input  (:number rec)
             output (:animal rec)]
@@ -33,6 +40,7 @@
   (select-spec-negative simple-select))
 
 (def specific-my-select #(my-select :animal %1 :number = %2))
+;; "I want the animal from DATA given that number = ID"
 (defspec my-select-pos 10
   (select-spec-positive specific-my-select))
 (defspec my-select-neg 10
