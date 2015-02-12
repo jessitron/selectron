@@ -24,6 +24,3 @@
   (select-spec-positive eric-select))
 (defspec eric-neg
   (select-spec-negative eric-select))
-
-(defspec datalog-one 10
-  (select-spec-positive selectron.datalog/datalog-select))
