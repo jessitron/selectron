@@ -46,7 +46,3 @@
 (defspec my-select-neg 10
   (select-spec-negative specific-my-select))
 
-
-(deftest a-test
-  (testing "spildrazil"
-    (is (= 1 1))))
