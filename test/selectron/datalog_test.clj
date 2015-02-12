@@ -7,3 +7,6 @@
 
 (defspec datalog-one 10
   (select-spec-positive selectron.datalog/datalog-select))
+
+(defspec datalog-neg 10
+  (select-spec-negative selectron.datalog/datalog-select))
